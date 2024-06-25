@@ -1,0 +1,292 @@
+\documentclass{beamer}
+\usepackage{amsfonts,amsmath,oldgerm}
+\usetheme{uftex}
+
+
+\newcommand{\testcolor}[1]{\colorbox{#1}{\textcolor{#1}{test}}~\texttt{#1}}
+
+\usefonttheme[onlymath]{serif}
+
+\titlebackground*{assets/CapaNova1.png}
+
+\newcommand{\hrefcol}[2]{\textcolor{cyan}{\href{#1}{#2}}}
+
+\title{Universidade Federal do Tocantins}
+\subtitle{Usando \LaTeX\ para Apresentação de Estágio}
+\course{Ciência da Computação}
+\author{Sophia Menezes Pontes}
+%\date{2024}
+
+\begin{document}
+\maketitle
+
+\section{Introdução}
+
+\begin{frame}{Beamer para Apresentação Final - Estágio Obrigatório}
+\begin{itemize}
+\item Beamer é uma das classes de documentos mais populares e poderosas para apresentações em \LaTeX
+\item O Beamer possui um
+\hrefcol{http://www.ctan.org/tex-archive/macros/latex/contrib/beamer/doc/beameruserguide.pdf}{manual do usuário}
+detalhado
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Beamer vs. PowerPoint}
+Comparado ao PowerPoint, usar \LaTeX\ é melhor porque:
+\begin{itemize}
+\item Você escreve o conteúdo, o computador faz a formatação!
+\item Produz um \texttt{pdf}: sem problemas com fontes, fórmulas,
+versões de programas
+\item Mais fácil de manter estilo, fontes, destaques, etc., consistentes
+\item A formatação de matemática em \TeX\ é a melhor:
+\begin{equation*}
+\mathrm{i},\hslash\frac{\partial}{\partial t} \Psi(\mathbf{r},t) =
+-\frac{\hslash^2}{2,m}\nabla^2\Psi(\mathbf{r},t)
+
+V(\mathbf{r})\Psi(\mathbf{r},t)
+\end{equation*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Como começar?}
+Para começar a trabalhar com o \texttt{uftex - Presentation}, inicie um documento \LaTeX\ com o preâmbulo:
+\begin{block}{Comandos para iniciar o Documento}
+\verb|\documentclass{beamer}|\\
+\verb|\usetheme{uftex}|\\
+\verb|\begin{document}|\\
+\verb|\begin{frame}{Hello, world!}|\\
+\verb|\end{frame}|\\
+\verb|\end{document}|\\
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Página de Título}
+Para definir uma página de título, você chama alguns comandos:
+\begin{block}{Os Comandos para a Página de Título}
+\begin{verbatim}
+\title{Título Exemplo}
+\subtitle{Subtítulo Exemplo}
+\author{Primeiro Autor, Segundo Autor}
+\date{\today}
+\end{verbatim}
+\end{block}
+Você pode então escrever a página de título com \verb|\maketitle|.
+
+Para definir uma \textbf{imagem de fundo}, use o comando \verb|\titlebackground|
+antes de \verb|\maketitle|; seu único argumento é o nome (ou caminho) de um arquivo gráfico.
+
+Se você usar a \textbf{versão com asterisco} \verb|\titlebackground*|, a imagem
+será cortada para uma visão dividida no lado direito do slide de título.
+
+\end{frame}
+
+\begin{frame}[fragile]{Escrevendo um Slide Simples}
+\framesubtitle{É realmente fácil!}
+\begin{itemize}[<+->]
+\item Um slide típico tem listas com marcadores
+\item Estes podem ser revelados em sequência
+\end{itemize}
+\begin{block}{Código para uma Página com uma Lista de Itens}
+\begin{verbatim}
+\begin{frame}{Escrevendo um Slide Simples}
+\framesubtitle{É realmente fácil!}
+\begin{itemize}[<+->]
+\item Um slide típico tem listas com marcadores
+\item Estes podem ser revelados em sequência
+\end{itemize}\end{frame}
+\end{verbatim}
+\end{block}
+\end{frame}
+
+\section{Personalização}
+
+\footlinecolor{uftexyellow}
+\begin{frame}[fragile]{Mudando o Estilo do Slide}
+\begin{itemize}
+\item Você pode selecionar o estilo de slide branco ou \textit{maincolor} \textbf{no
+préâmbulo} com \verb|\themecolor{white}| (padrão) ou \verb|\themecolor{main}|
+\begin{itemize}
+\item Você \emph{não} deve mudar isso dentro do documento: Beamer não gosta
+\item Se você \emph{realmente} precisar, pode ser necessário adicionar
+\verb|\usebeamercolor[fg]{normal text}| no slide
+\end{itemize}
+\item Você pode mudar a \textbf{cor da linha de rodapé} com
+\verb|\footlinecolor{color}|
+\begin{itemize}
+\item Coloque o comando \emph{antes} de um novo \verb|frame|
+\item Há quatro cores pré-definidas para isso:
+\testcolor{maincolor}, \testcolor{uftexyellow},
+\testcolor{uftexgreen}, \testcolor{uftexdarkgreen}
+\item O padrão é sem linha de rodapé; você pode usá-lo com
+\verb|\footlinecolor{}|
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Blocos}
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\begin{block}{Blocos Padrão}
+Estes têm uma cor coordenada com a linha de rodapé (e cinza no tema azul)
+\begin{verbatim}
+\begin{block}{título}
+conteúdo...
+\end{block}
+\end{verbatim}
+\end{block}
+\end{column}
+\begin{column}{0.7\textwidth}
+\begin{colorblock}[black]{uftexlightgreen}{Blocos de Cor}
+Semelhante aos da esquerda, mas você escolhe a cor. O texto será branco por
+padrão, mas você pode defini-lo com um argumento opcional.
+\small
+\begin{verbatim}
+\begin{colorblock}[black]{uftexlightgreen}{título}
+conteúdo...
+\end{colorblock}
+\end{verbatim}
+\end{colorblock}
+As cores pré-definidas para os blocos de cor são: \testcolor{uftexlightgreen}, , \testcolor{uftexlilla},
+\testcolor{maincolor}, \testcolor{uftexdarkgreen}, e
+\testcolor{uftexyellow}.
+\end{column}
+\end{columns}
+\end{frame}
+
+\footlinecolor{}
+\begin{frame}[fragile]{Usando Cores}
+\begin{itemize}
+  \item Você pode usar cores com o comando \verb|\textcolor{<nome da cor>}{texto}|
+  \item As cores são definidas no pacote \texttt{uftexcolor}:
+  \begin{itemize}
+  \item Cores principais: \testcolor{maincolor} e \testcolor{uftexgrey}
+  \item Três tons de verde: \testcolor{uftexlightgreen}, \testcolor{uftexgreen}, \testcolor{uftexdarkgreen}
+  \item Cores adicionais: \testcolor{uftexyellow}, \testcolor{uftexred}, \testcolor{uftexlilla}
+  \end{itemize}
+  \item Use \verb|\alert{}| para trazer o foco em algum lugar.
+  \item Como por \alert{exemplo!}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Adicionando imagens}
+\begin{columns}
+\begin{column}{0.7\textwidth}
+Como adicionar imagens no \LaTeX\ Beamer:
+\begin{block}{Código para Adicionar Imagens}
+\begin{verbatim}
+\usepackage{graphicx}
+% ...
+\includegraphics[width=\textwidth]
+{assets/exemplo_Ciencia-da-computacao}
+\end{verbatim}
+\end{block}
+\end{column}
+\begin{column}{0.35\textwidth}
+\includegraphics[width=\textwidth]
+{assets/exemplo_Ciencia-da-computacao}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Dividindo em Colunas}
+Dividir a página é fácil!
+\begin{columns}
+\begin{column}{0.6\textwidth}
+Esta é a primeira coluna
+\end{column}
+\begin{column}{0.3\textwidth}
+E esta é a segunda
+\end{column}
+\end{columns}
+\begin{block}{Código de Coluna}
+\begin{verbatim}
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        Esta é a primeira coluna
+    \end{column}
+    \begin{column}{0.3\textwidth}
+        E esta é a segunda
+    \end{column}
+    % Pode haver mais!
+\end{columns}
+\end{verbatim}
+\end{block}
+\end{frame}
+
+\begin{chapter}[assets/background (1)]{maincolor}{Slides com Tópicos a serem abordados}
+\begin{itemize}
+\item Slides de capítulo
+\item Slides com imagem lateral
+\end{itemize}
+\end{chapter}
+
+\footlinecolor{uftexred}
+\begin{frame}[fragile]{Slides de Capítulo}
+\begin{itemize}
+\item Iniciados com \verb|\begin{chapter}[<imagem>]{<cor>}{<título>}|
+\item Há sete cores pré-definidas: \testcolor{maincolor}, 
+\testcolor{uftexdarkgreen}, \testcolor{uftexfgreen}, 
+\testcolor{uftexlightgreen}, \testcolor{uftexred}, \testcolor{uftexyellow}, 
+\testcolor{uftexlilla}.
+
+\end{itemize}
+\end{frame}
+
+\begin{sidepic}{assets/ExemploFormatura}{Slides com Imagem Lateral}
+\begin{itemize}
+\item Iniciado com \texttt{$\backslash$begin\{sidepic\}\{<imagem>\}\{<título>\}}
+\end{itemize}
+\end{sidepic}
+
+\footlinecolor{maincolor}
+\begin{frame}
+\frametitle{Fontes}
+\begin{itemize}
+\item A principal tarefa das fontes é ser legível
+\item Existem boas fontes...
+  \begin{itemize}
+  \item {\textrm{Fontes serifadas}}
+  \item {\textsf{Fontes sem serifa}}
+  \end{itemize}
+\item ... e fontes não tão boas:
+  \begin{itemize}
+  \item {\texttt{Nunca use monoespaço para texto normal}}
+  \item {\frakfamily Fontes góticas ou caligráficas: devem sempre ser evitadas}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Slides Finais}
+\begin{itemize}
+\item Para inserir um slide final com o título ou agradecimentos finais, use \verb|\backmatter|.
+      \begin{itemize}
+      \item O título também aparece nos rodapés junto com o nome do autor, você pode alterar este texto com \verb|\footlinepayoff|
+      \item Você pode remover o título do slide final com \verb|\backmatter[notitle]|
+      \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Resumo}
+
+\begin{frame}
+\frametitle{Boa Sorte!}
+\begin{itemize}
+\item O suficiente para uma introdução!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+
+Este modelo é baseado em \hrefcol{https://www.overleaf.com/latex/templates/sintef-presentation/jhbhdffczpnx}{SINTEF Presentation} de \hrefcol{mailto
+.zenith@sintef.no}{Federico Zenith}.
+
+\vspace{\baselineskip}
+
+
+
+\end{frame}
+
+\backmatter
+\end{document}
